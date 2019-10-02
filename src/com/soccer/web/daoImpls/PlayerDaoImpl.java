@@ -37,7 +37,7 @@ public class PlayerDaoImpl implements PlayerDao{
 			e.printStackTrace();
 		}
 		return result;
-		
+		 
 		
 	}
 	
@@ -77,11 +77,14 @@ public class PlayerDaoImpl implements PlayerDao{
 		
 		List<PlayerBean> result = new ArrayList<PlayerBean>(); 
 		try {
-				String sql = "SELECT PLAYER_NAME , TEAM_ID , POSITION, HEIGHT FROM PLAYER WHERE TEAM_ID LIKE '"+param.getTeamId()+"' AND HEIGHT >= '"+param.getHeight()+"'  AND PLAYER_NAME LIKE '"+param.getPlayerName()+"%'";
-				ResultSet rs = DatabaseFactory.createDatabase(Constants.VENDOR)
-						.getConnection()
-						.prepareStatement(sql)
-						.executeQuery();
+				String sql = "SELECT PLAYER_NAME , TEAM_ID , POSITION, HEIGHT FROM PLAYER WHERE TEAM_ID LIKE ?  AND HEIGHT >= ?  AND PLAYER_NAME LIKE ?";
+				PreparedStatement stmt = DatabaseFactory.createDatabase(Constants.VENDOR).getConnection().prepareStatement(sql);
+				stmt.setString(1, param.getTeamId());
+				stmt.setString(2, param.getHeight());
+				stmt.setString(3, param.getPlayerName()+"%");
+				System.out.println(sql+"selectByTeamIdHeightName");
+				
+		ResultSet rs = stmt.executeQuery();		
 				
 				while (rs.next()) {
 					PlayerBean temp = new PlayerBean();
