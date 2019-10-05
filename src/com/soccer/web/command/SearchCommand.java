@@ -18,20 +18,21 @@ public class SearchCommand extends Command{
 
 	@Override
 	public void execute() {
-		
-		
-		request.setAttribute("searchResult",PlayerServiceImpl.getInstance().findPositions());
+				
 		switch (request.getParameter("searchCode")) {
-		case "2_positions": 	
-			break;
+		case "2_positions": 
+			request.setAttribute("searchResult",
+						PlayerServiceImpl.getInstance().findPositions()); break;
 		case "4_find_by_teamid_position": 	
-			request.setAttribute("searchResult",PlayerServiceImpl.getInstance().findByTeamIdPosition(request));
-		break;
-		case "5_find_by_teamid_height_name": 	request.setAttribute("searchResult",PlayerServiceImpl.getInstance().findByTeamIdHeightName(request));
-		break;
+			request.setAttribute("searchResult",
+					     PlayerServiceImpl.getInstance().findByTeamIdPosition(request)); break;
+		case "5_find_by_teamid_height_name": 	
+			request.setAttribute("searchResult",
+					     PlayerServiceImpl.getInstance().findByTeamIdHeightName(request)); break;
 		}
+		
 		request.setAttribute("searchCode", request.getParameter("searchCode"));
-		super.execute(getDomain(),getPage());
+		super.execute( getDomain(), getPage() );
 	}
 	
 	
