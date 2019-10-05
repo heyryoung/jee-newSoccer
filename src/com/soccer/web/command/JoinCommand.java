@@ -16,11 +16,11 @@ public class JoinCommand extends Command{
 	
 	@Override
 	public void execute() {
-        int userCnt = PlayerServiceImpl.getInstance().join(request);
+		int userCnt = PlayerServiceImpl.getInstance().join(request);
 
-    	setDomain("facade"); 
-    	request.setAttribute("page", (userCnt ==1) ? "facade" : "fail" );
-        super.execute(getDomain(),getPage());
-}
+		setDomain("facade"); 
+		request.setAttribute("page", (userCnt ==1) ? "facade" : "fail" );
+		super.execute(getDomain(),getPage());
+	}
 	
 }
